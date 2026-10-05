@@ -1,0 +1,5 @@
+model,RMSE (log),R2 (log),MAE ($),Median abs error ($),Within 25%
+Global median,1.0133,-0.035,52271.8945,37521.0,0.2914
+Country median,0.7407,0.447,37867.7551,23912.7465,0.3962
+Ridge regression,0.6419,0.5846,33080.6221,19507.7512,0.443
+Gradient boosting,0.6407,0.5862,31736.581,18864.0899,0.4711
