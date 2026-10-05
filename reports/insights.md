@@ -49,10 +49,30 @@ All salary figures are in USD. Medians are used instead of means because salary 
 - Remote respondents are more experienced (median 13 years vs 8 for in-person), so part of the gap reflects experience. In the United States the raw remote premium is about 42%; within experience groups it is smaller but persists: **+28%** (0-5 years), **+21%** (6-10), **+21%** (11-20) and **+10%** (21+).
 - This is still an association: remote roles are concentrated in software companies, and some remote workers are employed by companies based in higher-paying countries.
 
+## 8. Predicting salary
+
+A gradient boosting model was trained on the log of salary using 23 features (country, years of experience, job role, education, work arrangement, company size, age, employment type and flags for the 15 most used languages) and evaluated on a held-out 20% test set (4,341 respondents).
+
+| Model | R2 (log scale) | Median absolute error | Within 25% of actual salary |
+|---|---|---|---|
+| Global median | -0.03 | $37.5K | 29% |
+| Country median | 0.45 | $23.9K | 40% |
+| Ridge regression | 0.59 | $19.5K | 44% |
+| Gradient boosting | 0.59 | $18.9K | 47% |
+
+- **Country does most of the work.** Predicting each respondent's country median already lifts R2 from -0.03 to 0.45; all other features together add about 0.14.
+- Ridge regression and gradient boosting tie on the log scale (RMSE 0.642 vs 0.641); gradient boosting is slightly better in dollar terms.
+- Shuffling a feature on the test set shows what the model relies on: country (+0.39 RMSE) is far ahead of years of experience (+0.10), then age (+0.03), company size (+0.02), languages (+0.02), job role (+0.015), work arrangement (+0.014) and education (+0.005). Role, remote work and education add comparatively little predictive power once country and experience are known. Age and experience are correlated, so they share credit.
+- **Accuracy varies by country.** The median absolute percentage error is 19% in Germany, 22% in the United States, 38% in Brazil, 45% in India and 56% in Ukraine. The ranking follows how spread out salaries are within each country (interquartile range on the log scale: 0.44 in Germany, 0.60 in the United States, 1.27 in Brazil, 1.61 in India, 1.98 in Ukraine). The cause of the wider spread was not investigated.
+- **Prediction ranges must depend on the country.** A single 80% range for all countries covered 80.6% of test salaries overall, but only 41% in Ukraine, 59% in India and 61% in Brazil, while covering 95% in Germany. Computing the range per country from out-of-fold training residuals (with one shared, much wider range for countries with fewer than 150 training respondents, roughly 0.3x to 2.4x of the prediction) brings coverage to 80.4% overall, 80.3% in the larger countries and 80.6% in the smaller ones. By country, coverage ranges from 77% to 88%.
+- The width of the range reflects how predictable each market is. For the same profile (8 years of experience, back-end developer, remote, Python/SQL/JavaScript), the model predicts about $145,500 in the United States (range $92K to $240K), $103,500 in Germany ($72K to $154K) and $33,900 in India ($13K to $90K).
+
 ## Data notes and limitations
 
 - Only about half of all survey respondents reported a salary, so the results may be biased toward people who are comfortable sharing it.
 - The sample is experienced (median 12 years of professional experience) and reflects Stack Overflow users, not all developers.
 - The 2025 "Employed" category does not separate full-time from part-time work.
 - Salaries are self-reported and cluster on round numbers, so headline figures are rounded.
+- The model only sees survey fields. It cannot see the employer, specific skills or what is included in total compensation, so most of the variation within a country remains unexplained.
+- Prediction ranges are estimated from out-of-fold residuals, and countries with few respondents share one wide range.
 - All comparisons are associations from survey data, not causal effects.
