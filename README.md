@@ -142,6 +142,10 @@ After running notebook 06, from the repository root:
 python -m src.predict --country "United States" --experience 8 --role "Developer, back-end" --education "Bachelor's degree" --remote "Remote" --languages "Python;SQL;JavaScript"
 ```
 
+<p align="center">
+  <img src="reports/figures/demo_predict.gif" width="100%" alt="Command line salary prediction demo">
+</p>
+
 The command prints the predicted annual salary and an 80% range. Optional fields left out (company size, age) are treated as unanswered. Run `python -m src.predict --help` for all options. Category values must match the survey wording used in the notebooks.
 
 ## Limitations
