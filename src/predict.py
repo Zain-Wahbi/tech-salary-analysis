@@ -88,7 +88,10 @@ def main():
         "employment": args.employment,
         "languages": args.languages,
     }
-    result = predict_salary(profile)
+    try:
+        result = predict_salary(profile)
+    except FileNotFoundError as error:
+        raise SystemExit(f"Error: {error}")
     print(f"Predicted salary: ${round(result['prediction'], -2):,.0f}")
     print(f"80% range:        ${round(result['low'], -2):,.0f} to ${round(result['high'], -2):,.0f}")
     if not result["own_country_range"]:
