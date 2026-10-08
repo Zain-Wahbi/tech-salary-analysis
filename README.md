@@ -106,6 +106,19 @@ tech-salary-analysis/
 └── requirements.txt
 ```
 
+## Notebooks
+
+Read the analysis directly in the browser. If GitHub is slow to render a notebook, use the nbviewer link.
+
+| Notebook | What it does | View |
+|---|---|---|
+| 01 Data understanding | Loads the survey, reads the schema, inspects the salary column | [GitHub](notebooks/01_data_understanding.ipynb) · [nbviewer](https://nbviewer.org/github/Zain-Wahbi/tech-salary-analysis/blob/main/notebooks/01_data_understanding.ipynb) |
+| 02 Data cleaning | Selects columns, filters to employed respondents with a valid salary | [GitHub](notebooks/02_data_cleaning.ipynb) · [nbviewer](https://nbviewer.org/github/Zain-Wahbi/tech-salary-analysis/blob/main/notebooks/02_data_cleaning.ipynb) |
+| 03 Outliers and validation | Validates currency conversion, removes salary outliers, fixes impossible experience | [GitHub](notebooks/03_outliers_and_validation.ipynb) · [nbviewer](https://nbviewer.org/github/Zain-Wahbi/tech-salary-analysis/blob/main/notebooks/03_outliers_and_validation.ipynb) |
+| 04 EDA overview | Salary distribution, country, experience and education | [GitHub](notebooks/04_eda_overview.ipynb) · [nbviewer](https://nbviewer.org/github/Zain-Wahbi/tech-salary-analysis/blob/main/notebooks/04_eda_overview.ipynb) |
+| 05 Roles, languages, remote | Role, language and work arrangement comparisons | [GitHub](notebooks/05_eda_roles_languages_remote.ipynb) · [nbviewer](https://nbviewer.org/github/Zain-Wahbi/tech-salary-analysis/blob/main/notebooks/05_eda_roles_languages_remote.ipynb) |
+| 06 Salary model | Baselines, ridge and gradient boosting, feature importance, prediction ranges | [GitHub](notebooks/06_salary_regression_model.ipynb) · [nbviewer](https://nbviewer.org/github/Zain-Wahbi/tech-salary-analysis/blob/main/notebooks/06_salary_regression_model.ipynb) |
+
 ## Reproduce the analysis
 
 Tested with Python 3.13, pandas 3.0, scikit-learn 1.9.
@@ -146,4 +159,5 @@ Data: [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/), 
 
 ## Author
 
-Zain Wahbi, [github.com/Zain-Wahbi](https://github.com/Zain-Wahbi)
+**Zain Wahbi** — Backend & ML Engineer
+[GitHub](https://github.com/Zain-Wahbi) · [LinkedIn](https://linkedin.com/in/zain-wahbi) · [Portfolio](https://zain-wahbi.github.io/zain-wahbi-portfolio)
